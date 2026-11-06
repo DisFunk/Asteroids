@@ -8,9 +8,11 @@ def main():
     print(f"Screen height: {SCREEN_HEIGHT}")
 
     updatable = pygame.sprite.Group()
-    drawable = pygame.psrite.Group()
+    drawable = pygame.sprite.Group()
+    asteroids = pygame.sprite.Group()
 
     Player.containers = (updatable, drawable)
+    Asteroid.containers = (asteroids, updatable, drawable)
 
     p1 = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
 
@@ -25,7 +27,7 @@ def main():
         screen.fill("black")
         updatable.update(dt)
         for ob in drawable:
-            ob.draw(dt)
+            ob.draw(screen)
         p1.draw(screen)
         pygame.display.flip()
         dt= clock.tick(60) / 1000
