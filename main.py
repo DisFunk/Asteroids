@@ -7,6 +7,11 @@ def main():
     print(f"Screen width: {SCREEN_WIDTH}")
     print(f"Screen height: {SCREEN_HEIGHT}")
 
+    updatable = pygame.sprite.Group()
+    drawable = pygame.psrite.Group()
+
+    Player.containers = (updatable, drawable)
+
     p1 = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
 
     pygame.init()
@@ -18,7 +23,9 @@ def main():
         for event in pygame.event.get():
             pass
         screen.fill("black")
-        p1.update(dt)
+        updatable.update(dt)
+        for ob in drawable:
+            ob.draw(dt)
         p1.draw(screen)
         pygame.display.flip()
         dt= clock.tick(60) / 1000
