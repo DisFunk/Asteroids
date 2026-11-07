@@ -35,11 +35,18 @@ def main():
             pass
         screen.fill("black")
         updatable.update(dt)
+        
         for ast in asteroids:
             if ast.collides_with(p1):
                 log_event("player_hit")
                 print("Game over!")
                 sys.exit()
+            for shot in shots:
+                if ast.collides_with(shot):
+                    log_event("asteroid_shot")
+                    shot.kill()
+                    ast.kill()
+
         for ob in drawable:
             ob.draw(screen)
         pygame.display.flip()
