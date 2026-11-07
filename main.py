@@ -1,7 +1,10 @@
 import pygame
+from logger import log_event
+from asteroidfield import *
 from constants import *
 from player import *
 from logger import log_state
+
 def main():
     print(f"Starting Asteroids with pygame version: {pygame.version.ver}")
     print(f"Screen width: {SCREEN_WIDTH}")
@@ -13,7 +16,9 @@ def main():
 
     Player.containers = (updatable, drawable)
     Asteroid.containers = (asteroids, updatable, drawable)
+    AsteroidField.containers = (updatable)
 
+    AField = AsteroidField()
     p1 = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
 
     pygame.init()
@@ -28,7 +33,6 @@ def main():
         updatable.update(dt)
         for ob in drawable:
             ob.draw(screen)
-        p1.draw(screen)
         pygame.display.flip()
         dt= clock.tick(60) / 1000
         for event in pygame.event.get():
